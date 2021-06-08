@@ -1,32 +1,14 @@
 <?php
 
-// require './dbconnection.php';
+include_once('./dbconnection.php');
     if($_POST){
         print_r($_POST);
     }
 
-
- $host = "127.0.0.1";
- $user = "root";
- $pass = "12345";
- $db = "db_test";
-
- try{
-
-     $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //  $conn->beginTransaction();
-     $sql = "insert into student(st_name, st_gender, st_mobile) values('{$_POST[txt1]}', '{$_POST[txt2]}', {$_POST[txt3]})";
-     $res = $conn->exec($sql);
-    //  $conn->commit();
-    echo "<br>" . $res;
-    $conn = null;
-
-}catch(PDOException $e){
-
-    echo $e->getMessage();
-
-}
+$sql = "insert into student(st_name, st_gender, st_mobile) values('{$_POST[txt1]}', '{$_POST[txt2]}', {$_POST[txt3]})";
+$res = $conn->exec($sql);
+echo "<br>" . $res;
+$conn = null;
 
 ?>
 
