@@ -83,7 +83,7 @@ div {
         <option value="0" <?php if($catagory_data["status"]==0) echo "selected";   ?>> Inactive </option>
     </select>
   
-    <td> <input type="submit" name="catagory_submit_btn" value="Save" formaction="./submit_catagory_update.php"> </td>
+    <td> <input type="submit" name="catagory_submit_btn" value="Save" formaction="./catagory_submit_update.php"> </td>
   </form>
 </div>
 

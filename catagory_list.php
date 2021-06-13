@@ -1,20 +1,6 @@
 <?php
 
- $host = "127.0.0.1";
- $user = "root";
- $pass = "12345";
- $db = "db_test";
-
- try{
-
-     $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-}catch(PDOException $e){
-
-    echo $e->getMessage();
-
-}
+require_once('./dbconnection.php');
 
 $stmt = $conn->query("select * from catagories");
 
@@ -26,7 +12,7 @@ $stmt = $conn->query("select * from catagories");
 <style>
 
     #btn_catagory {
-        
+
         font-weight: bold;
         font-size: 15px;
         width: 10%;
@@ -60,7 +46,7 @@ $stmt = $conn->query("select * from catagories");
 
         <div>
 
-            <form action="./catagories_insert.php">
+            <form action="./catagories_add.php">
 
                 <input id="btn_catagory" type="submit" name="add_catagory" value="Add Category"> 
 
@@ -96,9 +82,9 @@ $stmt = $conn->query("select * from catagories");
             <td><?php echo $row["status"] == 1?'Active':'Inactive'; ?></td>
             <td><?php echo date('Y-m-d h:i:s', strtotime($row['created_at'])); ?></td>
             <td><?php echo date('Y-m-d h:i:s', strtotime($row['updated_at'])); ?></td>
-            <td> <a href="catagories_update.php?catagory_id=<?php echo $catagory_id; ?>">Update</a> | 
+            <td> <a href="catagory_update.php?catagory_id=<?php echo $catagory_id; ?>">Update</a> | 
              
-            <form method="post" action="./submit_catagory_delete.php">
+            <form method="post" action="./catagory_submit_delete.php">
 
             <input type="hidden" name="catagory_id" value="<?php echo $catagory_id; ?>">
             <input type="submit" name="catagory_delete_btn" value="Delete">
@@ -107,7 +93,7 @@ $stmt = $conn->query("select * from catagories");
             </td>
             </tr>
 
-            <?php } ?>
+            <?php } $conn = null; ?>
 
             </tbody>
 

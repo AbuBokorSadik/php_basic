@@ -22,7 +22,7 @@ if(isset($_POST['catagory_delete_btn']) && !empty($_POST['catagory_delete_btn'])
     $stmt= $conn->prepare($sql);
     $stmt->execute([$_POST['catagory_id']]);
     $conn = null;
-    header("Location: ./catagories.php");
+    header("Location: ./catagory_list.php");
 
 }
 
