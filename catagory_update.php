@@ -1,20 +1,7 @@
 <?php
 
-$host = "127.0.0.1";
-$user = "root";
-$pass = "12345";
-$db = "db_test";
-
-try{
-
-    $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-}catch(PDOException $e){
-
-   echo $e->getMessage();
-
-}
+require_once('./isAuthenticate.php');
+require_once('./dbconnection.php');
 
 if(isset($_GET['catagory_id']) && !empty($_GET['catagory_id'])){
 
@@ -32,6 +19,12 @@ if(isset($_GET['catagory_id']) && !empty($_GET['catagory_id'])){
 
 <!DOCTYPE html>
 <html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_sidebar.css">
+</head>
+
 <style>
 input[type=text], select {
   width: 100%;
@@ -66,9 +59,13 @@ div {
 </style>
 <body>
 
+
+<?php include_once('sidebar.php') ?>
+
+<div class="content">
+
 <h3>Update Catagory</h3>
 
-<div>
   <form method="post">
     <input type="hidden" name="catagory_id" value="<?php echo $_GET['catagory_id'] ?>">
     <label>Name</label>

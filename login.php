@@ -14,11 +14,12 @@ if(isset($_POST['btn_sing_in']) && !empty($_POST['btn_sing_in'])){
 			
 			$data = $stmt->fetch();
 			if(password_verify($_POST['password'], $data['password'])){
-				$_SESSION["user_id"] = $data['id'];
-				$_SESSION["user_name"] = $data['name'];
-				$_SESSION["user_email"] = $data['email'];
-				$_SESSION["user_status"] = $data['status'];
-				header("Location: ./isAuthenticate.php");
+				$_SESSION['user'] = [
+					'user_id' => $data['id'],
+					'user_name' => $data['name'],
+					'user_email' => $data['email']
+				];
+				header("Location: ./home.php");
 			}
 		}else{
 			$msg = "Wrong email or password!!!";

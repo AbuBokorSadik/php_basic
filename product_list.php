@@ -1,5 +1,6 @@
 <?php
 
+require_once('./isAuthenticate.php');
 require_once('./dbconnection.php');
 
 $stmt = $conn->query("select * from products");
@@ -16,73 +17,28 @@ while($data = $stmt2->fetch()){
 
 <html>
 
-<style>
-
-    #btn_product {
-        
-        font-weight: bold;
-        font-size: 15px;
-        width: 10%;
-        background-color: #4CAF50;
-        color: black;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    #custom {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#custom td, #custom th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#custom tr:nth-child(even){background-color: #f2f2f2;}
-
-#custom tr:hover {background-color: #ddd;}
-
-#custom th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
-
-img {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 150px;
-  height: 120px;
-}
-
-img:hover {
-  box-shadow: 0 0 2px 2px rgba(0, 140, 186, 0.5);
-}
-
-</style>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_sidebar.css">
+</head>
 
     <body>
 
-        <div>
+    <?php include_once('sidebar.php') ?>
 
-            <form action="./product_add.php">
+        <div class="content">
 
-                <input id="btn_product" type="submit" name="add_product" value="Add Product"> 
-
-            </form>
-
-        </div>
+        <section>
+            <nav>
+                <div class="nav-link">
+                    <ul>
+                        <form action="./product_add.php">
+                            <input id="btn_product" type="submit" name="add_product" value="Add Product"> 
+                        </form>
+                    </ul>
+                </div>
+            </nav>
+        </section>
 
         <div>
         <table id="custom">
@@ -131,14 +87,16 @@ img:hover {
             <td><?php echo $data["status"] == 1?'Active':'Inactive'; ?></td>
             <td><?php echo date('Y-m-d h:i:s', strtotime($data['created_at'])); ?></td>
             <td><?php echo date('Y-m-d h:i:s', strtotime($data['updated_at'])); ?></td>
-            <td> <a href="product_update.php?product_id=<?php echo $product_id; ?>">Update</a> | 
+            <td> 
+                <form method="get" action="./product_update.php">
+                    <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                    <input id="btn_update" type="submit" name="product_update_btn" value="Update">
+                </form>
              
-            <form method="post" action="./product_submit_delete.php">
-
-            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-            <input type="submit" name="product_delete_btn" value="Delete">
-
-            </form>
+                <form method="post" action="./product_submit_delete.php">
+                    <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                    <input id="btn_update" type="submit" name="product_delete_btn" value="Delete">
+                </form>
             </td>
             </tr>
 

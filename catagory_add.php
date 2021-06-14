@@ -1,5 +1,18 @@
+<?php
+
+require_once('./isAuthenticate.php');
+
+?>
+
+
 <!DOCTYPE html>
 <html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_sidebar.css">
+</head>
+
 <style>
 input[type=text], select {
   width: 100%;
@@ -34,9 +47,13 @@ div {
 </style>
 <body>
 
+
+<?php include_once('sidebar.php') ?>
+
+<div class="content">
+
 <h3>Add Catagory</h3>
 
-<div>
   <form method="post">
     <label>Name</label>
     <input type="text" name="catagory_name" placeholder="Enter catagory.." required="true">

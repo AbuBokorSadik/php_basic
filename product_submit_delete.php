@@ -1,5 +1,6 @@
 <?php
 
+require_once('./isAuthenticate.php');
 require_once('./dbconnection.php');
 
 if(isset($_POST['product_delete_btn']) && !empty($_POST['product_delete_btn']) && $_POST['product_delete_btn'] == "Delete"){

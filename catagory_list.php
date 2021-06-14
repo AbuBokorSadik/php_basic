@@ -1,5 +1,6 @@
 <?php
 
+require_once('./isAuthenticate.php');
 require_once('./dbconnection.php');
 
 $stmt = $conn->query("select * from catagories");
@@ -9,52 +10,29 @@ $stmt = $conn->query("select * from catagories");
 
 <html>
 
-<style>
-
-    #btn_catagory {
-
-        font-weight: bold;
-        font-size: 15px;
-        width: 10%;
-        background-color: #4CAF50;
-        color: black;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-    td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-    tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-</style>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_sidebar.css">
+</head>
 
     <body>
 
-        <div>
+        <?php include_once('sidebar.php') ?>
 
-            <form action="./catagories_add.php">
+        <div class="content">
 
-                <input id="btn_catagory" type="submit" name="add_catagory" value="Add Category"> 
+        <section>
+            <nav>
+                <div class="nav-link">
+                    <ul>
+                        <form action="./product_add.php">
+                            <input id="btn_catagory" type="submit" name="add_catagory" value="Add Category"> 
+                        </form>
+                    </ul>
+                </div>
+            </nav>
+        </section>
 
-            </form>
-
-        </div>
-
-        <div>
         <table>
             <thead>
             <tr>
@@ -82,14 +60,19 @@ $stmt = $conn->query("select * from catagories");
             <td><?php echo $row["status"] == 1?'Active':'Inactive'; ?></td>
             <td><?php echo date('Y-m-d h:i:s', strtotime($row['created_at'])); ?></td>
             <td><?php echo date('Y-m-d h:i:s', strtotime($row['updated_at'])); ?></td>
-            <td> <a href="catagory_update.php?catagory_id=<?php echo $catagory_id; ?>">Update</a> | 
+
+            <td> 
+                
+                <form method="get" action="./catagory_update.php">
+                    <input type="hidden" name="catagory_id" value="<?php echo $catagory_id; ?>">
+                    <input id="btn_update" type="submit" name="catagory_update_btn" value="Update">
+                </form>
              
-            <form method="post" action="./catagory_submit_delete.php">
-
-            <input type="hidden" name="catagory_id" value="<?php echo $catagory_id; ?>">
-            <input type="submit" name="catagory_delete_btn" value="Delete">
-
-            </form>
+                <form method="post" action="./catagory_submit_delete.php">
+                    <input type="hidden" name="catagory_id" value="<?php echo $catagory_id; ?>">
+                    <input id="btn_update" type="submit" name="catagory_delete_btn" value="Delete">
+                </form>
+            
             </td>
             </tr>
 

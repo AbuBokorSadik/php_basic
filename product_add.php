@@ -1,5 +1,6 @@
 <?php
 
+require_once('./isAuthenticate.php');
 require_once('./dbconnection.php');
 
 $stmt = $conn->query("select * from catagories");
@@ -8,6 +9,12 @@ $stmt = $conn->query("select * from catagories");
 
 <!DOCTYPE html>
 <html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_sidebar.css">
+</head>
+
 <style>
 
 textarea
@@ -52,7 +59,7 @@ input[type=submit]:hover {
 }
 
 div {
-  border-radius: 5px;
+  /* border-radius: 5px; */
   background-color: #f2f2f2;
   padding: 20px;
 }
@@ -71,10 +78,12 @@ img:hover {
 </style>
 <body>
 
-<h3>Add Product</h3>
+<?php include_once('sidebar.php') ?>
 
-<div>
-  <form method="post">
+<div class="content">
+
+  <h3>Add Product</h3>
+  <form method="post" enctype="multipart/form-data">
     <label>Product Name</label>
     <input type="text" name="product_name"  placeholder="Enter product name..." required="true">
 

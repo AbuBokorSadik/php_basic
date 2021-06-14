@@ -1,5 +1,6 @@
 <?php
 
+require_once('./isAuthenticate.php');
 require_once('./dbconnection.php');
 
 if(isset($_POST['catagory_id']) && !empty($_POST['catagory_id'])){

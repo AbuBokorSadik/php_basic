@@ -1,6 +1,7 @@
 <?php
 
-require_once('dbconnection.php');
+require_once('./isAuthenticate.php');
+require_once('./dbconnection.php');
 
 if(isset($_POST['catagory_submit_btn']) && !empty($_POST['catagory_submit_btn']) && $_POST['catagory_submit_btn'] == "Save"){
     $date = date('Y-m-d H:i:s');

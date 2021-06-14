@@ -1,5 +1,6 @@
 <?php
 
+require_once('./isAuthenticate.php');
 require_once('./dbconnection.php');
 
 if(isset($_GET['product_id']) && !empty($_GET['product_id'])){
@@ -16,6 +17,12 @@ if(isset($_GET['product_id']) && !empty($_GET['product_id'])){
 
 <!DOCTYPE html>
 <html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_sidebar.css">
+</head>
+
 <style>
 
 textarea
@@ -60,7 +67,7 @@ input[type=submit]:hover {
 }
 
 div {
-  border-radius: 5px;
+  /* border-radius: 5px; */
   background-color: #f2f2f2;
   padding: 20px;
 }
@@ -80,10 +87,13 @@ img:hover {
 </style>
 <body>
 
+<?php include_once('sidebar.php') ?>
+
+<div class="content">
+
 <h3>Update Product</h3>
 
-<div>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
 
     <input type="hidden" name="product_id" value="<?php echo $_GET['product_id'] ?>">
 
@@ -123,7 +133,7 @@ img:hover {
     </select>
 
     <label>Image</label><br><br>
-    <img src="" alt="" style="width:150px"><br>
+    <img src="<?php echo $data['image']; ?>" alt="" style="width:150px"><br>
     <input type="file" id="" name="product_image"><br><br>
 
     <label>Description</label> <br><br>
